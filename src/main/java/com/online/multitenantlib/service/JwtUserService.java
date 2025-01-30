@@ -13,4 +13,6 @@ public interface JwtUserService {
     JwtUserDetails updateUser(JwtUserDetails jwtUserDetails);
     void deleteUser(JwtUserDetails jwtUserDetails);
     UserDetailsService userDetailsService();
+
+    Optional<JwtUserDetails> getUserByUsername(String email);
 }

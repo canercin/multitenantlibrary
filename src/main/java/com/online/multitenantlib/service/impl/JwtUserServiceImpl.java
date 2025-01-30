@@ -5,6 +5,7 @@ import com.online.multitenantlib.repo.JwtUserRepository;
 import com.online.multitenantlib.service.JwtUserService;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -18,6 +19,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class JwtUserServiceImpl implements JwtUserService {
 
+    @Autowired
     private JwtUserRepository jwtUserRepository;
 
     @Override
@@ -50,8 +52,13 @@ public class JwtUserServiceImpl implements JwtUserService {
         return new UserDetailsService() {
             @Override
             public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-                return jwtUserRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+                return jwtUserRepository.findByUsername(email).orElse(null);
             }
         };
+    }
+
+    @Override
+    public Optional<JwtUserDetails> getUserByUsername(String email) {
+        return jwtUserRepository.findByUsername(email);
     }
 }
