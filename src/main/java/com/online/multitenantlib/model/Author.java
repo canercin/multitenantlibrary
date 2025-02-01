@@ -19,7 +19,7 @@ public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "author_id")
-    private UUID authorI;
+    private UUID authorId;
 
     @Column(name = "author_name")
     private String authorName;
