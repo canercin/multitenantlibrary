@@ -2,13 +2,13 @@ package com.online.multitenantlib.config;
 
 public class TenantContext {
 
-    private static ThreadLocal<Long> currentTenant = new ThreadLocal<>();
+    private static ThreadLocal<String> currentTenant = new ThreadLocal<>();
 
-    public static Long getCurrentTenant() {
+    public static String getCurrentTenant() {
         return currentTenant.get();
     }
 
-    public static void setCurrentTenant(Long tenant) {
+    public static void setCurrentTenant(String tenant) {
         currentTenant.set(tenant);
     }
 

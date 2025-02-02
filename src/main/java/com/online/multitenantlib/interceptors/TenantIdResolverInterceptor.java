@@ -23,7 +23,7 @@ public class TenantIdResolverInterceptor implements HandlerInterceptor {
             return false;
         }
         LOG.info("TenantIdResolverInterceptor: TenantId: {}", tenantId);
-        TenantContext.setCurrentTenant(Long.getLong(tenantId));
+        TenantContext.setCurrentTenant(tenantId);
         return true;
     }
 
