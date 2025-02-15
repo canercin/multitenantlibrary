@@ -2,7 +2,7 @@ package com.online.multitenantlib.config;
 
 public class TenantContext {
 
-    private static ThreadLocal<String> currentTenant = new ThreadLocal<>();
+    private static final ThreadLocal<String> currentTenant = new ThreadLocal<>();
 
     public static String getCurrentTenant() {
         return currentTenant.get();

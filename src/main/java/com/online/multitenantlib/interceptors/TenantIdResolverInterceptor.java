@@ -17,13 +17,11 @@ public class TenantIdResolverInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String tenantId = request.getHeader("X-TenantID");
-        if (tenantId == null) {
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            response.getWriter().write("X-TenantID header is missing");
-            return false;
+        if (tenantId != null && !tenantId.isEmpty()) {
+            TenantContext.setCurrentTenant(tenantId);
+        } else {
+            TenantContext.setCurrentTenant("master");
         }
-        LOG.info("TenantIdResolverInterceptor: TenantId: {}", tenantId);
-        TenantContext.setCurrentTenant(tenantId);
         return true;
     }
 
